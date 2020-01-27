@@ -21,6 +21,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -41,6 +49,10 @@ dependencies {
     implementation libs.dagger.dagger
     implementation libs.dagger.daggerAndroid
     implementation libs.dagger.daggerAndroidSupport
+
+    implementation libs.retrofit.retrofit
+    implementation libs.retrofit.gson
+    implementation libs.okhttp
     kapt libs.dagger.compiler
     kapt libs.dagger.androidCompiler
 

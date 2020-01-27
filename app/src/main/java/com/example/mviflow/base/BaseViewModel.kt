@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
 
 abstract class BaseViewModel<A : Action, S : State, R : Result>
@@ -16,7 +17,7 @@ abstract class BaseViewModel<A : Action, S : State, R : Result>
     private val results: Flow<R> = actions.consumeAsFlow().flatMapLatest { actionToResults(it) }
 
 
-    private val state: ConflatedBroadcastChannel<S> = ConflatedBroadcastChannel(initialState)
+    private val stateChannel: ConflatedBroadcastChannel<S> = ConflatedBroadcastChannel(initialState)
 
 
     fun sendEvent(action: A) = actions.offer(action)
@@ -28,10 +29,16 @@ abstract class BaseViewModel<A : Action, S : State, R : Result>
     @ExperimentalCoroutinesApi
     val stateJob = results.scan(initialState) { state, result -> resultToState(result, state) }
         .distinctUntilChanged()
-        .onEach { state.offer(it) }
+        .onEach { stateChannel.offer(it) }
         .launchIn(viewModelScope)
 
-    fun observeState(): Flow<S> = state.asFlow()
+    fun observeState(): Flow<S> = stateChannel.asFlow()
+
+
+    override fun onCleared() {
+        super.onCleared()
+        stateJob.cancel()
+    }
 
 
 }

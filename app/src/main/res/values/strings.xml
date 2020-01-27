@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MVI Flow</string>
+    <string name="news_image">News Image</string>
+    <string name="error_msg">Something went wrong</string>
 </resources>

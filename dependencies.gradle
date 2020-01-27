@@ -31,7 +31,9 @@ ext.versions = [
         "dagger"            : "2.25.4",
         "assistedInject"    : "0.5.2",
         "robolectric"       : "4.3.1",
-        "dokka"             : "0.9.18"
+        "dokka"             : "0.9.18",
+        "retrofit"          : "2.7.1",
+        "okhttp"            : "4.3.1"
 ]
 
 ext.libs = [
@@ -76,6 +78,13 @@ ext.libs = [
                 "androidCompiler"       : "com.google.dagger:dagger-android-processor:${versions.dagger}"
         ],
 
-        "robolectric"       : "org.robolectric:robolectric:${versions.robolectric}"
+        "robolectric"       : "org.robolectric:robolectric:${versions.robolectric}",
+
+        // Retrofit
+        "retrofit"          : [
+                "retrofit"              : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                "gson"                  : "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+        ],
+        "okhttp"            : "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
 ]
 
