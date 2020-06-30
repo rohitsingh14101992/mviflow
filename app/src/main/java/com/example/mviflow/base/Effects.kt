@@ -1,3 +1,3 @@
 package com.example.mviflow.base
 
-interface Action
+interface Effects

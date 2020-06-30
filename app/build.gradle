@@ -38,8 +38,8 @@ dependencies {
     implementation libs.coroutinesAndroid
 
     implementation libs.appCompat
-    implementation libs.lifecycle
     implementation libs.lifecycleRuntime
+    implementation libs.livedata
     implementation libs.coreKtx
     implementation libs.fragmentKtx
     implementation libs.constraintLayout

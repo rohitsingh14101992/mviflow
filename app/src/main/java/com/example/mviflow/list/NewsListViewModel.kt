@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class NewsListViewModel(state: NewsListState, val newsRepository: NewsRepository) :
-    BaseViewModel<NewsListAction, NewsListState, NewsListResult>(state) {
+    BaseViewModel<NewsListIntent, NewsListState, NewsListResult, NewsListViewEffects>(state) {
 
 
     val state = ObservableField<NewsListState>(state)
@@ -35,10 +35,16 @@ class NewsListViewModel(state: NewsListState, val newsRepository: NewsRepository
         }
     }
 
+    override suspend fun resultsToViewEffect(result: NewsListResult): NewsListViewEffects? =
+        when(result) {
+            is NewsListResult.Result -> NewsListViewEffects.ShowApiSuccessToast
+            else -> null
+        }
 
-    override suspend fun actionToResults(action: NewsListAction): Flow<NewsListResult> {
+
+    override suspend fun actionToResults(action: NewsListIntent): Flow<NewsListResult> {
         return when (action) {
-            is NewsListAction.LoadNews ->
+            is NewsListIntent.LoadNews ->
                 newsRepository.getNewsSource().map {
                     when (it) {
                         is Lce.Loading -> NewsListResult.Loading

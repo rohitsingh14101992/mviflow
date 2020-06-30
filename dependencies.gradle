@@ -10,9 +10,9 @@ ext.buildConfig = [
 ]
 
 ext.versions = [
-        "coroutines"        : "1.3.3",
+        "coroutines"        : "1.3.7",
         "appCompat"         : "1.1.0",
-        "lifecycle"         : "2.2.0-rc03",
+        "lifecycle"         : "2.2.0",
         "coreTest"          : "2.0.0",
         "vmSavedState"      : "1.0.0-rc03",
         "coreKtx"           : "1.2.0-rc01",
@@ -50,6 +50,7 @@ ext.libs = [
         "lifecycle"         : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",
         "coreTest"          : "androidx.arch.core:core-testing:${versions.coreTest}",
         "lifecycleRuntime"  : "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}",
+        "livedata"        :  "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}",
         "vmSavedState"      : "androidx.lifecycle:lifecycle-viewmodel-savedstate:${versions.vmSavedState}",
         "coreKtx"           : "androidx.core:core-ktx:${versions.coreKtx}",
         "recyclerView"      : "androidx.recyclerview:recyclerview:${versions.recyclerView}",
